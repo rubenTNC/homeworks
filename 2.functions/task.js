@@ -23,8 +23,9 @@ function worker(arr) {
 function makeWork(arrOfArr, worker) {
   let max = 0;
   for (let arr of arrOfArr) {
-    if (max < worker(arr)) {
-      max = worker(arr);
+    const funcResult = worker(arr);
+    if (max < funcResult) {
+      max = funcResult;
     }
   }
   return max;
@@ -32,8 +33,5 @@ function makeWork(arrOfArr, worker) {
 
 // Задание 3
 function worker2(arr) {
-  const max = Math.max(...arr);
-  const min = Math.min(...arr);
-  const difference = max - min;
-  return Math.abs(difference);
+  return Math.max(...arr) - Math.min(...arr);
 }
