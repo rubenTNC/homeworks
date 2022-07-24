@@ -128,12 +128,12 @@ class Student {
         if (indexSubject === -1) {
             return "Несуществующий предмет";
         } else {
-            return +(this.marks[indexSubject].marks.reduce((prev, item) => prev + item, 0) / this.marks[indexSubject].marks.length).toFixed();
+            return this.marks[indexSubject].marks.reduce((prev, item) => prev + item, 0) / this.marks[indexSubject].marks.length;
         }
     }
     getAverage() {
         let grades = [];
         this.marks.forEach(item => grades.push(...item.marks));
-        return +(grades.reduce((prev, item) => prev + item,0) / grades.length.toFixed());
+        return grades.reduce((prev, item) => prev + item,0) / grades.length;
     }
 }
