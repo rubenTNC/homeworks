@@ -101,7 +101,7 @@ class Student {
         this.subject = subjectName;
     }
     addMark(mark, subjectName) {
-        if (mark > 5 || mark < 1) {
+        if (mark > 5 || mark < 1 || typeof mark !== "number") {
             return "Ошибка, оценка должна быть числом от 1 до 5";
         } else {
             if (this.marks === undefined) {
@@ -128,16 +128,12 @@ class Student {
         if (indexSubject === -1) {
             return "Несуществующий предмет";
         } else {
-            let summ = 0;
-            this.marks[indexSubject].marks.forEach((item) => summ += item);
-            return +(summ / this.marks[indexSubject].marks.length);
+            return +(this.marks[indexSubject].marks.reduce((prev, item) => prev + item, 0) / this.marks[indexSubject].marks.length).toFixed();
         }
     }
     getAverage() {
         let grades = [];
         this.marks.forEach(item => grades.push(...item.marks));
-        let summ = 0;
-        grades.forEach(item => summ += item);
-        return +(summ / grades.length);
+        return +(grades.reduce((prev, item) => prev + item,0) / grades.length.toFixed());
     }
 }
