@@ -31,15 +31,16 @@ class AlarmClock {
         return new Date().toLocaleTimeString().slice(0, -3);
     }
     start() {
-        function checkClock(call) {
+        let checkClock = call => { 
             if (call.time === this.getCurrentFormattedTime()) {
                 call.callback();
             }
-            if (this.timerId === null) {
-                this.timerId = setInterval(() => {
-                    this.alarmCollection.forEach(clock => checkClock(call));
-                }, 1000);
-            }
+        };
+
+        if (this.timerId === null) {
+            this.timerId = setInterval(() => {
+                this.alarmCollection.forEach(call => checkClock(call));
+            }, 1000);
         }
     }
     stop() {
