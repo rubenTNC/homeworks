@@ -49,8 +49,10 @@ class AlarmClock {
         }
     }
     printAlarms() {
-        this.alarmCollection.forEach(item => console.log(`${item.id}, ${item.time}`));
-    }
+        console.log(`Печать всех будильников: ${ this.alarmCollection.length}`);
+
+        this.alarmCollection.forEach(item => console.log(`Будильник № ${ item.id } заведен на ${ item.time }`));
+    };
     clearAlarms() {
         clearInterval(this.timerId);
         this.alarmCollection.length = 0;
