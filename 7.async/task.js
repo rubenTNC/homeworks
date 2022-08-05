@@ -11,11 +11,7 @@ class AlarmClock {
         if (indexId !== -1) {
             return console.error("");
         } else {
-            this.alarmCollection.push({
-                id: id,
-                time: time,
-                callback: callback
-            });
+            this.alarmCollection.push({time, callback, id});
         }
     }
     removeClock(id) {
@@ -24,6 +20,7 @@ class AlarmClock {
             return false;
         } else {
             this.alarmCollection.splice(indexId, 1);
+            return true;
         }
     }
 
@@ -55,8 +52,8 @@ class AlarmClock {
         this.alarmCollection.forEach(item => console.log(`Будильник № ${ item.id } заведен на ${ item.time }`));
     };
     clearAlarms() {
-        clearInterval(this.timerId);
-        this.alarmCollection.length = 0;
+        this.stop();
+        this.alarmCollection = [];
     }
 }
 
