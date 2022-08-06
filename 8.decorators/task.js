@@ -17,19 +17,30 @@ function cachingDecoratorNew(func) {
 function debounceDecoratorNew(func, delay) {
   let firstStart = false;
   return function (...args) {
-    if(!firstStart) {
-      func(...args);
+    if (!firstStart) {
+      const result = func(...args);
       firstStart = true;
       setTimeout(() => firstStart = false, delay);
+      return result;
     }
   };
 }
 
 function debounceDecorator2(func) {
-  let count = 0;
-  if(firstStart) {
-    count += 1;
+  let firstStart = false;
+
+  function wrapper(...args) {
+    wrapper.count.push(args);
+
+    if (!isTrottled) {
+      const result = func(...args);
+      isTrottled = true;
+
+      setTimeout(() => firstStart = false, delay);
+      return result;
+    }
   }
-  console.log(count)
-  return count;
+  wrapper.count = [];
+
+  return wrapper;
 }
